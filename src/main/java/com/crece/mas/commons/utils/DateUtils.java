@@ -15,6 +15,8 @@ public class DateUtils {
     public static final String AMERICA_LIMA = "America/Lima";
     public static final ZoneId LIMA_TIME_ZONE = ZoneId.of(AMERICA_LIMA);
 
+    public static final String ABEL_KEVIN = "Abel";
+
     public static Timestamp convert(LocalDate date, LocalTime time) {
         return date != null ? Timestamp.valueOf(date.atTime(time)
                 .atZone(LIMA_TIME_ZONE)
