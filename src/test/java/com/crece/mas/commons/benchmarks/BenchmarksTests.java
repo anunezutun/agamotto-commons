@@ -1,8 +1,5 @@
 package com.crece.mas.commons.benchmarks;
 
-
-import com.crece.mas.commons.guid.GUIDGenerator;
-import org.junit.jupiter.api.Test;
 import org.openjdk.jmh.annotations.*;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
@@ -17,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 @OutputTimeUnit(TimeUnit.MILLISECONDS)
 public class BenchmarksTests {
 
-    private static GUIDGenerator guidGenerator = new GUIDGenerator(1, 2);
 
     //@Test
     public void runBenchmarks() throws Exception {
@@ -37,29 +33,4 @@ public class BenchmarksTests {
         new Runner(opts).run();
     }
 
-    @Benchmark
-    public void idGeneration() {
-        guidGenerator.generateID();
-    }
-
-    @Benchmark
-    public void idMask(GUIDDataProvider guidDataProvider) {
-        guidGenerator.encodeID(guidDataProvider.guid);
-    }
-
-    @Benchmark
-    public void idUnmask(GUIDDataProvider guidDataProvider) {
-        guidGenerator.decodeAlphaID(guidDataProvider.maskedGuid);
-    }
-
-    @State(Scope.Benchmark)
-    public static class GUIDDataProvider {
-        private BigInteger guid;
-        private String maskedGuid;
-        @Setup(Level.Invocation)
-        public void setup() {
-            guid = guidGenerator.generateID();
-            maskedGuid = guidGenerator.encodeID(guid);
-        }
-    }
 }
